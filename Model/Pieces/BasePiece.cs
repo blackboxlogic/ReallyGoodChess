@@ -15,7 +15,14 @@ namespace Model
 
 		public char AsColoredChar()
 		{
-			return (char)(Char + (int)Color * ToBlackChar);
+			if(Char == '☃')
+			{
+				return '⛇';
+			}
+			else
+			{
+				return (char)(Char + (int)Color * ToBlackChar);
+			}
 		}
 
 		protected bool IsOnBoard(Vector landed)

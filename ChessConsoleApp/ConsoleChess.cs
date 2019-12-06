@@ -26,9 +26,9 @@ namespace ChessConsoleApp
 			board[7, 7] = new Rook() { Color = Color.Black, Location = new Vector(7, 7) };
 
 			board[0, 4] = new King() { Color = Color.White, Location = new Vector(0, 4) };
-			//board[0, 3] = new MySuperCoolPiece() { Color = Color.White, Location = new Vector(0, 3) };
+			board[0, 3] = new Snowman() { Color = Color.White, Location = new Vector(0, 3) };
 			board[7, 4] = new King() { Color = Color.Black, Location = new Vector(7, 4) };
-			//board[7, 3] = new MySuperCoolPiece() { Color = Color.black, Location = new Vector(7, 3) };
+			board[7, 3] = new Snowman() { Color = Color.Black, Location = new Vector(7, 3) };
 
 			for (int i = 0; i < 8; i++)
             {
@@ -56,7 +56,7 @@ namespace ChessConsoleApp
 				game.TakeATurn();
 				game.CurrentBoard.ToConsole(game.PreviousBoard());
 				result = game.ChechWinner();
-				//System.Threading.Thread.Sleep(50);
+				//System.Threading.Thread.Sleep(9000);
 				//Console.ReadKey(true);
 			}
 
