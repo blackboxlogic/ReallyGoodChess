@@ -39,7 +39,7 @@ namespace ChessConsoleApp
 			Game Game = new Game();
 			Game.History.Push(board);
 			Game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White });
-			Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			Game.Players.Enqueue(new SemiIntelligentPlayer() { Name = "player2", Color = Color.Black });
 
 			return Game;
         }
