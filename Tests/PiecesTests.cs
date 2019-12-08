@@ -1,3 +1,4 @@
+using ChessConsoleApp;
 using Model;
 using Model.Pieces;
 using NUnit.Framework;
@@ -22,6 +23,32 @@ namespace Tests
         }
 
         [Test]
+        public void PawnNumberOfMoves_PawnCannotCaptureFriendlyPieces_OnePossibleMove()
+        {
+            var board = new BasePiece[8, 8];
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            var Pawn2 = new Pawn() { Color = Color.White, Location = new Vector(3, 3) };
+            var Pawn3 = new Pawn() { Color = Color.White, Location = new Vector(2, 4) };
+            board[1, 3] = Pawn1;
+            board[3, 3] = Pawn2;
+            board[2, 4] = Pawn3;
+            var possibleMoves = Pawn1.GetMoves(board).Length;
+            Assert.AreEqual(1, possibleMoves);
+        }
+
+        [Test]
+        public void PawnCannotJumpOverFriendlyPieces_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            var Pawn2 = new Pawn() { Color = Color.White, Location = new Vector(2, 3) };
+            board[1, 3] = Pawn1;
+            board[2, 3] = Pawn2;
+            var possibleMoves = Pawn1.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves == 0);
+        }
+
+        [Test]
         public void RookNumberOfMoves_HasNotMovedYetOnEmptyBoard_FourteenPossibleMoves()
         {
             var board = new BasePiece[8, 8];
@@ -32,6 +59,20 @@ namespace Tests
         }
 
         [Test]
+        public void RookNumberOfMoves_RookCannotCaptureFriendlyPieces_FivePossibleMoves()
+        {
+            var board = new BasePiece[8, 8];
+            var Rook = new Rook() { Color = Color.White, Location = new Vector(0, 0) };
+            var Pawn= new Pawn() { Color = Color.White, Location = new Vector(2, 0) };
+            var Bishop = new Bishop() { Color = Color.White, Location = new Vector(0, 5) };
+            board[0, 0] = Rook;
+            board[2, 0] = Pawn;
+            board[0, 5] = Bishop;
+            var possibleMoves = Rook.GetMoves(board).Length;
+            Assert.AreEqual(5, possibleMoves);
+        }
+
+        [Test]
         public void KnightNumberOfMoves_HasNotMovedYetOnEmptyBoard_ThreePossibleMoves()
         {
             var board = new BasePiece[8, 8];
@@ -39,6 +80,35 @@ namespace Tests
             board[0, 1] = Knight;
             var possibleMoves = Knight.GetMoves(board).Length;
             Assert.AreEqual(3, possibleMoves);
+        }
+
+        [Test]
+        public void KnightNumberOfMoves_KnightCannotCaptureFriendlyPieces_ZeroPossibleMoves()
+        {
+            var board = new BasePiece[8, 8];
+            var Knight = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(2, 0) };
+            var Pawn2 = new Pawn() { Color = Color.White, Location = new Vector(2, 2) };
+            var Pawn3 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            board[0, 1] = Knight;
+            board[2, 0] = Pawn1;
+            board[2, 2] = Pawn2;
+            board[1, 3] = Pawn3;
+            var possibleMoves = Knight.GetMoves(board).Length;
+            Assert.AreEqual(0, possibleMoves);
+        }
+
+        [Test]
+        public void KnightCanJumpOverFriendlyPieces_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Knight = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
+            for (int i = 0; i < 8; i++)
+            {
+                board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
+            }
+            var possibleMoves = Knight.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves > 0);
         }
 
         [Test]
@@ -71,16 +141,5 @@ namespace Tests
             Assert.AreEqual(5, possibleMoves);
         }
 
-        [Test]
-        //Rook has 14 possible moves if it's located anywhere on an empty 8 X 8 chess board
-        //TODO : Use loop to test for all given positions
-        public void RookNumberOfMoves_AnywhereOnEmptyBoard_FourteenPossibleMoves()
-        {
-            var board = new BasePiece[8, 8];
-            var Rook = new Rook() { Color = Color.White, Location = new Vector(3, 4) };
-            board[3, 4] = Rook;
-            var possibleMoves = Rook.GetMoves(board).Length;
-            Assert.AreEqual(14, possibleMoves);
-        }
     }
 }
