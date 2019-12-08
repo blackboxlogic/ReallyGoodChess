@@ -23,7 +23,7 @@ namespace Tests
         }
 
         [Test]
-        public void PawnNumberOfMoves_PawnCannotCaptureFriendlyPieces_OnePossibleMove()
+        public void PawnCannotCaptureFriendlyPieces_ReturnsTrue()
         {
             var board = new BasePiece[8, 8];
             var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
@@ -33,7 +33,7 @@ namespace Tests
             board[3, 3] = Pawn2;
             board[2, 4] = Pawn3;
             var possibleMoves = Pawn1.GetMoves(board).Length;
-            Assert.AreEqual(1, possibleMoves);
+            Assert.IsTrue(possibleMoves == 1);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Tests
         }
 
         [Test]
-        public void KnightNumberOfMoves_KnightCannotCaptureFriendlyPieces_ZeroPossibleMoves()
+        public void KnightCannotCaptureFriendlyPieces_ReturnsTrue()
         {
             var board = new BasePiece[8, 8];
             var Knight = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
@@ -95,7 +95,7 @@ namespace Tests
             board[2, 2] = Pawn2;
             board[1, 3] = Pawn3;
             var possibleMoves = Knight.GetMoves(board).Length;
-            Assert.AreEqual(0, possibleMoves);
+            Assert.IsTrue(possibleMoves == 0);
         }
 
         [Test]
@@ -103,6 +103,7 @@ namespace Tests
         {
             var board = new BasePiece[8, 8];
             var Knight = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
+            board[0, 1] = Knight;
             for (int i = 0; i < 8; i++)
             {
                 board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
@@ -122,6 +123,19 @@ namespace Tests
         }
 
         [Test]
+        public void BishopCannotCaptureFriendlyPieces_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Bishop = new Bishop() { Color = Color.White, Location = new Vector(0, 2) };
+            for (int i = 0; i < 8; i++)
+            {
+                board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
+            }
+            var possibleMoves = Bishop.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves == 0);
+        }
+
+        [Test]
         public void SnowmanNumberOfMoves_HasNotMovedYetOnEmptyBoard_ThreePossibleMoves()
         {
             var board = new BasePiece[8, 8];
@@ -129,6 +143,55 @@ namespace Tests
             board[0, 3] = Snowman;
             var possibleMoves = Snowman.GetMoves(board).Length;
             Assert.AreEqual(5, possibleMoves);
+        }
+
+        [Test]
+        public void SnowmanCanJumpOverFriendlyPieces_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Snowman = new Snowman() { Color = Color.White, Location = new Vector(0, 3) };
+            board[0, 3] = Snowman;
+            board[0, 0] = new Rook() { Color = Color.White, Location = new Vector(0, 0) };
+            board[0, 7] = new Rook() { Color = Color.White, Location = new Vector(0, 7) };
+            board[0, 1] = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
+            board[0, 6] = new Knight() { Color = Color.White, Location = new Vector(0, 6) };
+            board[0, 2] = new Bishop() { Color = Color.White, Location = new Vector(0, 2) };
+            board[0, 5] = new Bishop() { Color = Color.White, Location = new Vector(0, 5) };
+            board[0, 4] = new King() { Color = Color.White, Location = new Vector(0, 4) };
+            for (int i = 0; i < 8; i++)
+            {
+                board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
+            }
+            var possibleMoves = Snowman.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves > 0);
+        }
+
+        [Test]
+        public void SnowmanCanCaptureEnemyPieceInFrontOfIt_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Snowman = new Snowman() { Color = Color.White, Location = new Vector(0, 3) };
+            var Pawn = new Pawn() { Color = Color.Black, Location = new Vector(2, 3) };
+            board[0, 3] = Snowman;
+            board[2, 3] = Pawn;
+            var possibleMoves = Snowman.GetMoves(board).Length;
+            //Board is empty except for these two pieces
+            //Snowman should have 5 possible moves, including one that captures the enemy piece in front of it
+            Assert.IsTrue(possibleMoves == 5);
+        }
+
+        [Test]
+        public void SnowmanCannotCaptureFriendlyPieceInFrontOfIt_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Snowman = new Snowman() { Color = Color.White, Location = new Vector(0, 3) };
+            var Pawn = new Pawn() { Color = Color.White, Location = new Vector(2, 3) };
+            board[0, 3] = Snowman;
+            board[2, 3] = Pawn;
+            var possibleMoves = Snowman.GetMoves(board).Length;
+            //Board is empty except for these two pieces
+            //Snowman should have 4 possible moves
+            Assert.IsTrue(possibleMoves == 4);
         }
 
         [Test]
