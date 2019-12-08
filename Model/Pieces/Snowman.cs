@@ -6,7 +6,7 @@ namespace Model.Pieces
 {
     public class Snowman : BasePiece
     {
-        protected override char Char => '☃'; //TODO :opposite piece is not the same char
+        protected override char Char => '☃'; 
 
         private static Vector[] Directions = new Vector[] {
             new Vector(1, 1),
