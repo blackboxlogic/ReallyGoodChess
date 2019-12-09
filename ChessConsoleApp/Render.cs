@@ -22,7 +22,7 @@ namespace ChessConsoleApp
 					{
 						Console.ForegroundColor = piece.Color == Color.White ? ConsoleColor.White : ConsoleColor.Black;
 						Console.Write(piece.AsColoredChar());
-						Console.Write(" ");
+						Console.Write("");
 					}
 					else
 					{

@@ -56,7 +56,7 @@ namespace ChessConsoleApp
 				game.TakeATurn();
 				game.CurrentBoard.ToConsole(game.PreviousBoard());
 				result = game.ChechWinner();
-				//System.Threading.Thread.Sleep(9000);
+				System.Threading.Thread.Sleep(4000);
 				//Console.ReadKey(true);
 			}
 
