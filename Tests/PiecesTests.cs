@@ -49,6 +49,46 @@ namespace Tests
         }
 
         [Test]
+        public void PawnCannotMoveSidewaysOrDiagonally_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            var Pawn2 = new Pawn() { Color = Color.White, Location = new Vector(2, 3) };
+            var Pawn3 = new Pawn() { Color = Color.White, Location = new Vector(2, 4) };
+            board[1, 3] = Pawn1;
+            board[2, 3] = Pawn2;
+            board[2, 4] = Pawn3;
+            var possibleMoves = Pawn1.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves == 0);
+        }
+
+        [Test]
+        public void PawnPerformsValidCapture_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            var Pawn2 = new Pawn() { Color = Color.White, Location = new Vector(2, 3) };
+            var Pawn3 = new Pawn() { Color = Color.Black, Location = new Vector(2, 4) };
+            board[1, 3] = Pawn1;
+            board[2, 3] = Pawn2;
+            board[2, 4] = Pawn3;
+            var possibleMoves = Pawn1.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves == 1);
+        }
+
+        [Test]
+        public void PawnCannotCaptureEnemyPieceInFrontOfIt_ReturnsTrue()
+        {
+            var board = new BasePiece[8, 8];
+            var Pawn1 = new Pawn() { Color = Color.White, Location = new Vector(1, 3) };
+            var Pawn2 = new Pawn() { Color = Color.Black, Location = new Vector(2, 3) };
+            board[1, 3] = Pawn1;
+            board[2, 3] = Pawn2;
+            var possibleMoves = Pawn1.GetMoves(board).Length;
+            Assert.IsTrue(possibleMoves == 0);
+        }
+
+        [Test]
         public void RookNumberOfMoves_HasNotMovedYetOnEmptyBoard_FourteenPossibleMoves()
         {
             var board = new BasePiece[8, 8];
@@ -175,8 +215,6 @@ namespace Tests
             board[0, 3] = Snowman;
             board[2, 3] = Pawn;
             var possibleMoves = Snowman.GetMoves(board).Length;
-            //Board is empty except for these two pieces
-            //Snowman should have 5 possible moves, including one that captures the enemy piece in front of it
             Assert.IsTrue(possibleMoves == 5);
         }
 
@@ -189,8 +227,6 @@ namespace Tests
             board[0, 3] = Snowman;
             board[2, 3] = Pawn;
             var possibleMoves = Snowman.GetMoves(board).Length;
-            //Board is empty except for these two pieces
-            //Snowman should have 4 possible moves
             Assert.IsTrue(possibleMoves == 4);
         }
 
