@@ -22,6 +22,7 @@ namespace ChessConsoleApp
 					{
 						Console.ForegroundColor = piece.Color == Color.White ? ConsoleColor.White : ConsoleColor.Black;
 						Console.Write(piece.AsColoredChar());
+						//Console.Write(" "); This is where the issue came from
 						Console.Write("");
 					}
 					else
