@@ -1,0 +1,14 @@
+The things I added are the following:
+
+	- Added a new piece called Snowman
+	- Added unit tests for the pieces
+	- Made a simple change to the Render class that makes the chessboard look symmetrical without having to readjust the window size of the output.
+
+The Snowman piece works like this:
+
+	- Its starting position is located where the Queen piece should be.
+	- It can move and capture forward, backwards and sideways.
+	- If it moves sideways, it can only move one square at a time.
+	- If it moves forward or backwards, it does so by skipping a square.
+	- This means that it can jump over both firendly and enemy pieces.
+
