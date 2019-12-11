@@ -26,9 +26,9 @@ namespace ChessConsoleApp
 			board[7, 7] = new Rook() { Color = Color.Black, Location = new Vector(7, 7) };
 
 			board[0, 4] = new King() { Color = Color.White, Location = new Vector(0, 4) };
-			//board[0, 3] = new MySuperCoolPiece() { Color = Color.White, Location = new Vector(0, 3) };
+			board[0, 3] = new PieceyMcPiece() { Color = Color.White, Location = new Vector(0, 3) };
 			board[7, 4] = new King() { Color = Color.Black, Location = new Vector(7, 4) };
-			//board[7, 3] = new MySuperCoolPiece() { Color = Color.black, Location = new Vector(7, 3) };
+			board[7, 3] = new PieceyMcPiece() { Color = Color.Black, Location = new Vector(7, 3) };
 
 			for (int i = 0; i < 8; i++)
             {
@@ -47,7 +47,7 @@ namespace ChessConsoleApp
         static void Main(string[] args)
         {
 			Console.OutputEncoding = Encoding.Unicode;
-			Game game = SetUp();
+			Game game = SetUp();                                                                                                                                                
 			game.CurrentBoard.ToConsole();
 			double? result = null;
 
