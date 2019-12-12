@@ -7,6 +7,10 @@ namespace ChessConsoleApp
 {
     class ChessConsoleApp
     {
+	    
+	    //checks the start commands given in the game
+	    public static commands comandChecker = new commands();
+	    
         public static Game SetUp()
         {
 			var board = new BasePiece[8, 8];
@@ -48,7 +52,16 @@ namespace ChessConsoleApp
 
         static void Main(string[] args)
         {
-			Console.OutputEncoding = Encoding.Unicode;
+	        
+	        Console.WriteLine("Welcome to Really Good Chess!!");
+	        Console.WriteLine("Type help To Get Help or Type Anything You Want To Start the Game");
+
+	        string command = Console.ReadLine();
+	       
+	        //checks to see if a command was given
+	        comandChecker.startCommands(command);
+
+	        Console.OutputEncoding = Encoding.Unicode;
 			Game game = SetUp();
 			game.CurrentBoard.ToConsole();
 			double? result = null;

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Model.Pieces
 {
-	public class Squart : BasePiece // Aka Horsey, can jump, captures where it lands
+	public class Squart : BasePiece // A typo of square that I left as the name
+	                               //It can move in square or one random position on the board
 	{
 		protected override char Char => '�';
 
@@ -48,8 +49,6 @@ namespace Model.Pieces
 				boards.Add(CloneBoardAndMove<Squart>(board, rngLanded));
 			}	
 			
-			
-
 			return boards.ToArray();
 		}
 	}
