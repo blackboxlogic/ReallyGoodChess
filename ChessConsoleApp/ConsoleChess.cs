@@ -9,9 +9,10 @@ namespace ChessConsoleApp
     {
 	    
 	    //checks the start commands given in the game
-	    public static commands comandChecker = new commands();
+	    //and runs the create player command
+	    public static commands comandRunner = new commands();
 	    
-        public static Game SetUp()
+		    public static Game SetUp()
         {
 			var board = new BasePiece[8, 8];
 			board[0, 1] = new Knight() { Color = Color.White, Location = new Vector(0, 1) };
@@ -44,8 +45,9 @@ namespace ChessConsoleApp
 
 			Game Game = new Game();
 			Game.History.Push(board);
-			Game.Players.Enqueue(new humanPlayer() { Name = "player1", Color = Color.White });
-			Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			
+			//makes the players
+			comandRunner.createPlayers(Game);
 
 			return Game;
         }
@@ -59,8 +61,12 @@ namespace ChessConsoleApp
 	        string command = Console.ReadLine();
 	       
 	        //checks to see if a command was given
-	        comandChecker.startCommands(command);
+	        comandRunner.startCommands(command);
 
+	        Console.WriteLine("Please Provide What Color You Would Like To Control: ");
+
+	        
+	        
 	        Console.OutputEncoding = Encoding.Unicode;
 			Game game = SetUp();
 			game.CurrentBoard.ToConsole();

@@ -51,5 +51,27 @@ namespace ChessConsoleApp {
             Console.ReadLine();
         }
 
+        //should be moved from commands to its own file
+        //will done later
+        public int createPlayers(Game game) {
+
+            string color = Console.ReadLine();
+
+            if (color.Equals("white") ) {
+                game.Players.Enqueue(new humanPlayer() { Name = "player1", Color = Color.White });
+                game.Players.Enqueue(new BasePlayer(){ Name = "player2", Color = Color.Black });
+                return 1;
+            } 
+            if (color.Equals("black")) {
+                game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White  });
+                game.Players.Enqueue(new humanPlayer(){ Name = "player2", Color = Color.Black }); 
+                return 1;
+            }
+            
+            Console.WriteLine("Invalid Color: Please Provide A Valid Color ");
+            return createPlayers(game); 
+
+        }
+
     }
 }
