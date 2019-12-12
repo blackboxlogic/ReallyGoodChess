@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Pieces;
+using Model.Players;
 using System;
 using System.Text;
 
@@ -26,11 +27,11 @@ namespace ChessConsoleApp
 			board[7, 7] = new Rook() { Color = Color.Black, Location = new Vector(7, 7) };
 
 			board[0, 4] = new King() { Color = Color.White, Location = new Vector(0, 4) };
-			//board[0, 3] = new MySuperCoolPiece() { Color = Color.White, Location = new Vector(0, 3) };
+			board[0, 3] = new Checkers() { Color = Color.White, Location = new Vector(0, 3) };
 			board[7, 4] = new King() { Color = Color.Black, Location = new Vector(7, 4) };
-			//board[7, 3] = new MySuperCoolPiece() { Color = Color.black, Location = new Vector(7, 3) };
+			board[7, 3] = new Checkers() { Color = Color.Black, Location = new Vector(7, 3) };
 
-			for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
 				board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
 				board[6, i] = new Pawn() { Color = Color.Black, Location = new Vector(6, i) };
@@ -38,8 +39,12 @@ namespace ChessConsoleApp
 
 			Game Game = new Game();
 			Game.History.Push(board);
+
+            Console.WriteLine("Enter player name:");
+            var playerName = Console.ReadLine();
+
 			Game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White });
-			Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			Game.Players.Enqueue(new HumanPlayer() { Name = playerName, Color = Color.Black });
 
 			return Game;
         }
