@@ -54,23 +54,51 @@ namespace ChessConsoleApp {
         //should be moved from commands to its own file
         //will done later
         public int createPlayers(Game game) {
-
+            
             string color = Console.ReadLine();
 
-            if (color.Equals("white") ) {
-                game.Players.Enqueue(new humanPlayer() { Name = "player1", Color = Color.White });
-                game.Players.Enqueue(new BasePlayer(){ Name = "player2", Color = Color.Black });
-                return 1;
-            } 
-            if (color.Equals("black")) {
-                game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White  });
-                game.Players.Enqueue(new humanPlayer(){ Name = "player2", Color = Color.Black }); 
+            Console.WriteLine("Please Provide The Number Of Human Players That Are Playing: ");
+            int numOfPlayers = playerIntChecker();
+
+            if (numOfPlayers.Equals(1)) {
+                if (color.Equals("white") ) {
+                    game.Players.Enqueue(new humanPlayer() { Name = "player1", Color = Color.White });
+                    game.Players.Enqueue(new BasePlayer(){ Name = "player2", Color = Color.Black });
+                    return 1;
+                } 
+                if (color.Equals("black")) {
+                    game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White  });
+                    game.Players.Enqueue(new humanPlayer(){ Name = "player2", Color = Color.Black }); 
+                    return 1;
+                } 
+            }
+            else {
+                game.Players.Enqueue(new humanPlayer() { Name = "player1", Color = Color.White  });
+                game.Players.Enqueue(new humanPlayer(){ Name = "player2", Color = Color.Black });
                 return 1;
             }
+           
             
             Console.WriteLine("Invalid Color: Please Provide A Valid Color ");
             return createPlayers(game); 
 
+        }
+
+        public int playerIntChecker() {
+            
+            int inputAsInt;
+            String input = Console.ReadLine();
+            
+            //error handling
+            if (Int32.TryParse(input, out inputAsInt)) {
+                if (inputAsInt.Equals(1) | inputAsInt.Equals(2)) {
+                    return inputAsInt; 
+                }
+            }
+
+            Console.WriteLine("Please Provide A Either 1 or 2 For The Number of Players: ");
+            
+            return playerIntChecker();
         }
 
     }

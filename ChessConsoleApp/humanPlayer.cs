@@ -17,10 +17,11 @@ namespace ChessConsoleApp {
                 options[i].ToConsole(currentBoard);
             }
 
-            return userInput(currentBoard);
+            return userInput(currentBoard, options);
         }
 
-        public int userInput(BasePiece[,] currentBoard) {
+        //users input to perform moves
+        public int userInput(BasePiece[,] currentBoard, BasePiece[][,] options) {
 
             int inputAsInt;
             String input = Console.ReadLine();
@@ -28,17 +29,18 @@ namespace ChessConsoleApp {
            //checks to see if a command was given
            commands commandChecker = new commands();
            if (commandChecker.checkCommands(currentBoard, input)) {
-               return userInput(currentBoard);
+               return userInput(currentBoard, options);
            }
             
             //error handling
             if (Int32.TryParse(input, out inputAsInt)) {
+                if(inputAsInt < options.Length )
                 return inputAsInt;
             }
 
             Console.WriteLine("Please Provide A Valid Option Number: ");
            
-            return userInput(currentBoard);
+            return userInput(currentBoard, options);
         }
         
     }
