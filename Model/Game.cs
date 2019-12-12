@@ -20,7 +20,7 @@ namespace Model
 
 		public void TakeATurn()
 		{
-			var moves = GetMoves();
+			var moves = ShuffleMoves(GetMoves());
 			var player = GetNextPlayer();
 			int moveIndex = player.ChooseMove(moves);
 			History.Push(moves[moveIndex]);
@@ -62,6 +62,15 @@ namespace Model
 			}
 
 			return (int)Turn;
+		}
+
+		public BasePiece[][,] ShuffleMoves(BasePiece[][,] moves)
+		{
+
+			Random rnd = new Random();
+			BasePiece[][,] RandomMoves = moves.OrderBy(x => rnd.Next()).ToArray();
+
+			return RandomMoves;
 		}
 	}
 }
