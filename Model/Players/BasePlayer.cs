@@ -11,7 +11,7 @@ namespace Model
 
 		
 		//pass in original board 
-		virtual public int ChooseMove(BasePiece[][,] options, BasePiece[,] currentBoard)
+		 public int ChooseMove(BasePiece[][,] options, BasePiece[,] currentBoard)
 		{
 			int bestIndex = 0;
 			double bestScore = ScoreMove(options[0]);

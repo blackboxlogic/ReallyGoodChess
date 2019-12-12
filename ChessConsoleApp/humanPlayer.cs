@@ -5,7 +5,7 @@ using Model;
 namespace ChessConsoleApp {
     public class humanPlayer : BasePlayer {
         
-        public int ChooseMove(BasePiece[][,] options, BasePiece[,] currentBoard) {
+        public override int ChooseMove(BasePiece[][,] options, BasePiece[,] currentBoard) {
 
            for (var i = 0; i < options.Length; i++ ) {
                Console.WriteLine("options: ");
