@@ -23,7 +23,6 @@ namespace Model
 					bestScore = score;
 				}
 			}
-
 			return bestIndex;
 		}
 
