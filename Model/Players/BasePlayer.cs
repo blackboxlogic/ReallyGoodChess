@@ -9,6 +9,8 @@ namespace Model
 		public string Name;
 		public Color Color;
 
+		
+		//pass in original board 
 		virtual public int ChooseMove(BasePiece[][,] options)
 		{
 			int bestIndex = 0;

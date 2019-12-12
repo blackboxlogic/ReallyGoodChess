@@ -8,6 +8,10 @@ namespace Model
 	{
 		public Stack<BasePiece[,]> History = new Stack<BasePiece[,]>();
 		public Queue<BasePlayer> Players = new Queue<BasePlayer>();
+		
+		//humanPlayer that gives the program access to the humanPlayer functions
+		public humanPlayer HumanPlayer = new humanPlayer();
+		
 		public BasePiece[,] CurrentBoard => History.Peek();
 		public BasePiece[,] PreviousBoard()
 		{
@@ -22,8 +26,19 @@ namespace Model
 		{
 			var moves = GetMoves();
 			var player = GetNextPlayer();
-			int moveIndex = player.ChooseMove(moves);
-			History.Push(moves[moveIndex]);
+
+			if (player?.Color == Color.White) {
+				
+				int chosenMove = HumanPlayer.chooseMove(moves);
+				History.Push(moves[chosenMove]);
+
+				//HumanPlayer.listPieceMoves(History);
+			}else {
+				int moveIndex = player.ChooseMove(moves);
+				History.Push(moves[moveIndex]);	
+			}
+			
+			
 		}
 
 		public Color Turn => Players.Peek().Color;
