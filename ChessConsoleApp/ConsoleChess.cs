@@ -35,11 +35,12 @@ namespace ChessConsoleApp
 				board[1, i] = new Pawn() { Color = Color.White, Location = new Vector(1, i) };
 				board[6, i] = new Pawn() { Color = Color.Black, Location = new Vector(6, i) };
             }
-
+			Console.WriteLine("Please enter your name");
+			String username = Console.ReadLine();
 			Game Game = new Game();
 			Game.History.Push(board);
 			Game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White });
-			Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			Game.Players.Enqueue(new MarquisPlayer() { Name = username, Color = Color.Black });
 
 			return Game;
         }
@@ -59,8 +60,14 @@ namespace ChessConsoleApp
 				//System.Threading.Thread.Sleep(50);
 				//Console.ReadKey(true);
 			}
-
-			Console.WriteLine(result);
+			if(result ==0)
+			{
+				Console.WriteLine("Yay! you did it!");
+			}
+			else
+			{
+				Console.WriteLine("Sorry! Maybe next time");
+			}
 			Console.ReadKey(false);
 			return;
 		}
