@@ -8,12 +8,13 @@ namespace Model
 {
     public class SemiIntelligentPlayer : BasePlayer
     {
-        
+        Random r = new Random();
 
         override public int ChooseMove(BasePiece[][,] options)
         {
-            var bestMove = Double.NegativeInfinity;
-            var bestMoveIndex = 0;
+            var bestMoveIndex = r.Next(0, options.Length);
+            var bestMove = ScoreMove(options[bestMoveIndex]);
+           
             var current = 0.0;
             for (int i = 0; i < options.Length; i++)
             {
@@ -23,10 +24,7 @@ namespace Model
                     bestMoveIndex = i;
                 }
             }
-            if (Double.IsNegativeInfinity(bestMove))
-            {
-                bestMoveIndex = new Random().Next(options.Length);
-            }
+
             return bestMoveIndex;
         }
 
