@@ -32,7 +32,8 @@ namespace Model
 
          override protected double ScoreMove(BasePiece[,] option)
         {
-            return -(5 * option.GetPieces().Count(p => p.GetType() == typeof(King) && p.Color != Color) +
+            return -(5 * option.GetPieces().Count(p => p.GetType() == typeof(King) ||
+                                                  p.GetType() == typeof(PieceyMcPiece) && p.Color != Color) +
                      3 * option.GetPieces().Count(p => p.GetType() == typeof(Bishop) ||
                                                         p.GetType() == typeof(Rook) ||
                                                        p.GetType() == typeof(Knight) && p.Color != Color) +

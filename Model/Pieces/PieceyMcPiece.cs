@@ -36,9 +36,7 @@ namespace Model.Pieces
                         if (moves[currMove][x, y] != board[x, y])
                         {
                             actualMoves.Add(CloneBoardAndMove<PieceyMcPiece>(board, new Vector(x, y)));
-                           //moves[currMove][x, y] = new PieceyMcPiece() { Color = Color, Location = new Vector(x, y) };
                         }
-
                     }
                 }
             }
