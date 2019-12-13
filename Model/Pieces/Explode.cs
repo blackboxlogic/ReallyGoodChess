@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Model.Pieces
 {
-	public class Explode : BasePiece // a character that the snowman piece morphs into after a capture
+	public class Explode : BasePiece 
+		// a character that the snowman piece morphs into after a capture
+		// explosion happens after one move
 	{
 		protected override char Char => '⚠'; // run
 

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 namespace Model.Pieces
 {
 	public class Snowman : BasePiece 
-		// snow man is a nice guy, but when he is forced to capture a piece by the player, he becomes heartbroken and explodes from guilt
+		// snow man is a nice guy, but when he is forced to capture a piece by the player, 
+		// he becomes heartbroken and explodes from guilt
 	{
 		protected override char Char => '☃';
 
