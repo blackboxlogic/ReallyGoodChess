@@ -8,7 +8,7 @@ The Snowman piece works like this:
 
 	- Its starting position is located where the Queen piece should be.
 	- It can move and capture forward, backwards and sideways.
-	- If it moves sideways, it can only move one square at a time.
-	- If it moves forward or backwards, it does so by skipping a square.
-	- This means that it can jump over both firendly and enemy pieces.
+	- If it moves diagonally, it can only move one square at a time.
+	- If it moves forward,backwards or sideways, it does so by skipping a square.
+	- This means that it can jump over both friendly and enemy pieces.
 
