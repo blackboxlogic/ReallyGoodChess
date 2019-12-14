@@ -1,74 +1,63 @@
-# Really Good Chess
+﻿# Really Good Chess
 Assigned: 2019/12/03
 Due: 2019/12/12
 
-### Objective
-* Practice the features of C#, and be creative, and maybe do something that interests you?
+### Part 1
+I created a Scissors piece. It can move 1 block forward, including diagonals. 
+It can also swap with any *team* piece that is directly neighboring. 
+This is the only time it can move backwards. As far as capturing, it can only capture like a pawn (diagonally).
+The unicode for white scissors ✄ is (U+2704) and for black scissors ✂ is (U+2702). 
 
-### Context
-Our chess game is *really good*, but could it be *really really good*?
-Don't like all this chess stuff? Shoot me an email with a different project idea.
+Now, since these aren't 6 units away from each other like the other chess pieces, I just had an if/else to make sure
+the right symbols were actually being printed. So in ToConsole() in Render.cs, something like
+```
+if(Piece is Scissors)
+    Console.Write((piece.Color == Color.White) ? "✄" : "✂");
+```
 
-### To Start
-* Fork my *new* chess repo from here: [https://github.com/blackboxlogic/ReallyGoodChess](https://github.com/blackboxlogic/ReallyGoodChess) to your github account, then git-clone that to your computer
-* "But Alex, the pieces are just rectangles!" - After running, click on the top left of your console -> Properties -> Font -> use `MS Gothic`, and increase the font size
+Otherwise, `piece.AsColoredChar());` would execute which would print whatever (U+2704) + 6 is, = 	✐. Don't want that.. although.. what if a pencil
+could erase and draw a piece wherever it wanted? Maybe only 2x a match? Hmm..
 
-### Part 1 (50 points)
-* Make a new type of chess piece (Inherits `BasePiece`)
-  * Your piece should be not be over-powered or useless or like any other piece
-  * Your piece should use a [different symbol](https://unicode-table.com/en) when displayed on the board
-  * Add this new piece in that gap next to the kings on the starting board
 
-Some inspiration:
-* Odd movement patterns
-* Piece can move to any empty space on the board, pieces next to this piece can't move
-* Piece can act like any piece that is adjacent to it
-* Each time piece moves, it transforms into a different piece type (including its symbol)
-* Piece can move to any empty square, and this piece cannot be captured, but you've lost if this is your only piece
-* When the piece captures, it explodes and everything near it (including itself) is removed from the board
-* Or, like, something else? I don't know, ask a 5 year old, they might have some *1337* ideas
+*Markdown automatically renders the emoji version of black scissors into scissors, but under the code block, it shows as it would on the board.*
 
-### Part 2 (50 points)
-Pick **one** of the following:
 
-Make a new type of "smart" chess player (Inherits `BasePlayer`).
-Your player should *reliably* beat the `BasePlayer` when it plays as either black or white.
-You can use any third party API or nuget package but remember that our version of chess is *special*.
+### Part 2
 
-**OR**
+I tried to implement castling, but it's not fully working since I think it has to do with us switching X and Ys around when we were having issues with the pawn.
+It should mostly be okay though. So I stopped doing castling and worked on the "human chess player." Not the actual Smart AI player, but rather letting
+humans play each other. I didn't make a new Human class, so it can't play the BasePlayer (though that would be fairly easy to implement), instead it takes two humans sharing  the keyboard and playing  each other.
 
-* Make a new type of "human" chess player (Inherits `BasePlayer`)
-  * This player will allow a human player to choose moves
-  * User chooses their player name
-  * User may only choose moves that are legal
 
-**OR**
+![img](./imgs/img1.png "Start of game")
 
-Write a function that takes an array of `Player` and runs a chess tournament.
-Show progress and statistics about tournament.
 
-**OR**
+It prints the currrent state of the board after each move, and then for whoever's turn it is it prints their name and their possible moves. It then asks 
+for input of a move, if it's valid it executes it, if it's not valid the turn goes again. For example, if there's 25 moves but the user inputs
+50 for Move (board) #50, he would go again after getting a message saying "No such move #50".
 
-Fix the bug: when a pawn reaches the 8th rank by capturing an opponent, the pawn doesn't promote (it stays a pawn).
-AND
-Implement [castling](https://en.wikipedia.org/wiki/Castling): If the king hasn't moved, and the rook hasn't moved, and there are no pieces in between them, the king moves two toward the rook and the rook jumps to the other side of the king.
-AND
-Implement the pawn's move [En Passant](https://en.wikipedia.org/wiki/En_passant): If an opponent's pawn has just (very last move) jumped two forward, one of your pawns can capture it as if it only moved one forward.
+![img](./imgs/img2.png "Game")
 
-**OR**
 
-Write unit tests for the pieces
+I think that's pretty much it. I haven't gone through the whole game but have fun if you choose to do so. 
+I also have no idea why it prints Red instead of Dark Grey..  I've tried everything.
 
-**OR**
+##### Possible improvements:
 
-Write an API around the game, OR OMG, make it a website! Now that I think of it, it wouldn't be too hard?
+- Have the Console initially prompt for Human vs CPU or Human vs Human
+- Right now, we obviously have Human vs Human, could just keep that code. But if it's Human vs CPU, all you would need to do is have CPU automatically choose
+a move instead of waiting for user input. We already have that in BasePlayer (probably make it prioritize captures too), so this is where that Human BasePlayer class would
+probably come.
+- Also Console formatting could probably change. Instead of  
 
-**OR**
+[Current Board]  
+[Possible  Board]  
+[Possible  Board]   
+...  
+[Possible  Board]
 
-Do something else novel
-
-### To Finish
-* Add something to the repo describing what you did and demonstrating (screenshots?) the results
-* Commit and push it to your github
-* Make a pull request to my github
-* Profit
+Perhaps this would  be easier to read (and not lose track of previous state). I found myself scrolling up for the current state often.   
+[Current Board]   [Possible  Board]  
+[Current Board]   [Possible  Board]  
+..  
+[Current Board]   [Possible  Board]  

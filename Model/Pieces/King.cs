@@ -33,22 +33,25 @@ namespace Model.Pieces
             }
 
             //castling (THIS SECTION NEEDS WORK)
-            if (!HasMoved) //king hasn't moved nor is he in check (cant castle out of check)
+            if (!HasMoved) //king hasn't moved nor is he in check (cant castle out of check),
             {
-                Vector leftRook = new Vector(0, Location.Y);
+                Vector leftRook = new Vector(0,Location.Y);
                 if (board[leftRook.X, leftRook.Y]?.HasMoved == false) //left rook on King's team has not moved
                 {
                     if (NothingInBetweenLeft(board))
                     {
-
+                        var kingMove = (CloneBoardAndMove<King>(board, new Vector(Location.X, Location.Y-2)));
+                        boards.Add(CloneBoardAndMove<Rook>(kingMove, new Vector(Location.X, Location.Y+1))); //add the board after move the rook, on the king board
                     }
                 }
 
-                Vector rightRook = new Vector(7, Location.Y);
+                Vector rightRook = new Vector(7,Location.Y);
                 if (board[rightRook.X, rightRook.Y]?.HasMoved == false)//right rook on King's team has not moved
                 {
                     if (NothingInBetweenRight(board))
                     {
+                        var kingMove = (CloneBoardAndMove<King>(board, new Vector(Location.X, Location.Y-2)));
+                        boards.Add(CloneBoardAndMove<Rook>(kingMove, new Vector(Location.X, Location.Y-1))); //add the board after move the rook, on the king board
 
                     }
                 }

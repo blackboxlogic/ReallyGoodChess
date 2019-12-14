@@ -7,6 +7,7 @@ namespace ChessConsoleApp
 	{
 		public static void ToConsole(this BasePiece[,] board, BasePiece[,] lastBoard = null)
 		{
+			
 			for (int x = 0; x < 8; x++)
 			{
 				for (int y = 0; y < 8; y++)
@@ -20,9 +21,22 @@ namespace ChessConsoleApp
 					var piece = board[x, y];
 					if (piece != null)
 					{
-						Console.ForegroundColor = piece.Color == Color.White ? ConsoleColor.White : ConsoleColor.Black;
-						Console.Write(piece.AsColoredChar());
-						Console.Write(" ");
+						if(piece.GetType().Name.CompareTo("Scissors") == 0)
+						{
+							Console.ForegroundColor = piece.Color == Color.White ? ConsoleColor.White : ConsoleColor.Black;
+
+							Console.Write((piece.Color == Color.White) ? "✄" : "✂");
+							
+							Console.Write(" ");
+						}
+
+						else
+						{
+							Console.ForegroundColor = piece.Color == Color.White ? ConsoleColor.White : ConsoleColor.Black;
+							Console.Write(piece.AsColoredChar());
+							Console.Write(" ");
+						}
+						
 					}
 					else
 					{

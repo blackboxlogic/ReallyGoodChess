@@ -18,11 +18,11 @@ namespace Model
 			return previous;
 		}
 
-		public void TakeATurn()
+		public void TakeATurn(int index)
 		{
 			var moves = GetMoves();
 			var player = GetNextPlayer();
-			int moveIndex = player.ChooseMove(moves);
+			int moveIndex = index;
 			History.Push(moves[moveIndex]);
 		}
 
@@ -34,7 +34,7 @@ namespace Model
 			return nextPlayer;
 		}
 
-		private BasePiece[][,] GetMoves()
+		public BasePiece[][,] GetMoves()
 		{
 			List<BasePiece[,]> options = new List<BasePiece[,]>();
 			var currentBoard = History.Peek();
@@ -52,7 +52,7 @@ namespace Model
 
 		// null means game isn't over.
 		// 0 is black win, 1 is white win, .5 is draw
-		public double? ChechWinner()
+		public double? CheckWinner()
 		{
 			if (History.Count > 2000) return .5;
 
