@@ -35,7 +35,7 @@ namespace Model.Pieces
 
             foreach (BasePiece p in board)
             {
-                if (p.Color == Color)
+                if (p?.Color == Color)
                 {
                     boards.Add(CloneBoardAndMove<BombAssassin>(board, p.Location));
                 }
