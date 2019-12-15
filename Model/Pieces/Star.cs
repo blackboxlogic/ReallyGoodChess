@@ -29,17 +29,11 @@ namespace Model.Pieces
 				if (IsOnBoard(landed)
 					&& board[landed.X, landed.Y]?.Color != Color)
 				{
-					boards.Add(CloneBoardAndMove<Knight>(board, landed));
+					boards.Add(CloneBoardAndMove<Star>(board, landed));
 				}
 			}
 
 			return boards.ToArray();
 		}
-
-        public char AsColoredChar()
-        {
-            return (char)(Char - (int)Color * ToBlackChar);
-        }
-
     }
 }
