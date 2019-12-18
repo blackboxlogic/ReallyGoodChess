@@ -113,19 +113,19 @@ namespace Model.Pieces
             }
 
             // Capture diagonally one space left or right
-            if (IsOnBoard(forwardLeftTwo)
+            if (IsOnBoard(forwardLeft) && IsOnBoard(forwardLeftTwo)
                 && board[forwardLeft.X, forwardLeft.Y] != null
                 && board[forwardLeft.X, forwardLeft.Y].Color != Color
                 && board[forwardLeftTwo.X, forwardLeftTwo.Y] == null)
             {
-                boards.Add(CloneBoardAndJump<Frog>(board, forwardLeftTwo, forwardLeftTwo));
+                boards.Add(CloneBoardAndJump<Frog>(board, forwardLeft, forwardLeftTwo));
             }
-            if (IsOnBoard(forwardRightTwo)
+            if (IsOnBoard(forwardRight) && IsOnBoard(forwardRightTwo)
                 && board[forwardRight.X, forwardRight.Y] != null
                 && board[forwardRight.X, forwardRight.Y].Color != Color
                 && board[forwardRightTwo.X, forwardRightTwo.Y] == null)
             {
-                boards.Add(CloneBoardAndJump<Frog>(board, forwardRightTwo, forwardRightTwo));
+                boards.Add(CloneBoardAndJump<Frog>(board, forwardRight, forwardRightTwo));
             }
 
             return boards.ToArray();
