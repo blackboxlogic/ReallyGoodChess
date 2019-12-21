@@ -9,7 +9,7 @@ namespace Model
 		public string Name;
 		public Color Color;
 
-		virtual public int ChooseMove(BasePiece[][,] options)
+		virtual public int ChooseMove (BasePiece[][,] options, BasePiece[,] currentBoard)
 		{
 			int bestIndex = 0;
 			double bestScore = ScoreMove(options[0]);

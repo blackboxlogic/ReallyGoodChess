@@ -46,6 +46,7 @@ namespace ChessConsoleApp
 
         static void Main(string[] args)
         {
+			int count = 1;
 			Console.OutputEncoding = Encoding.Unicode;
 			Game game = SetUp();
 			game.CurrentBoard.ToConsole();

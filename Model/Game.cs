@@ -20,9 +20,22 @@ namespace Model
 
 		public void TakeATurn()
 		{
+			int moveIndex = 0;
 			var moves = GetMoves();
 			var player = GetNextPlayer();
-			int moveIndex = player.ChooseMove(moves);
+			var currentBoard = History.Peek();
+
+			if (this.player2)
+			{
+				//Model.Players.SmartPlayer splayer = new Model.Players.SmartPlayer();
+				//splayer = player;
+				moveIndex = player.ChooseSmartMove(this, player);
+			}
+			else
+			{
+				moveIndex = player.ChooseMove(moves, currentBoard);
+			}
+			
 			History.Push(moves[moveIndex]);
 		}
 

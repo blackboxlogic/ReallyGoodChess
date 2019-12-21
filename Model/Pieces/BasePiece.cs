@@ -18,6 +18,10 @@ namespace Model
 			return (char)(Char + (int)Color * ToBlackChar);
 		}
 
+		public char AsBaseChar()
+		{
+			return Char;
+		}
 		protected bool IsOnBoard(Vector landed)
 		{
 			return landed.X >= 0 && landed.X <= 7 && landed.Y >= 0 && landed.Y <= 7;
