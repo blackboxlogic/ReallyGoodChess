@@ -24,4 +24,4 @@ Part 1
 	
 Part II
 
-~ 	
+~ Implementing Unit testing of Pawn to catch the bug with promoting
