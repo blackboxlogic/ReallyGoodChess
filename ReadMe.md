@@ -24,4 +24,8 @@ Part 1
 	
 Part II
 
-~ Implementing Unit testing of Pawn to catch the bug with promoting
+~ Implemented HumanPlayer interface in the console
+	+ Lists all possible moves to be taken and waits for input.
+	+ Input is the number of the move in the list of moves.
+	+ Screenshot of this in solution source folder.
+

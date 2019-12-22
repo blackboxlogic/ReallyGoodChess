@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Pieces;
+using Model.Players;
 using System;
 using System.Text;
 
@@ -39,7 +40,9 @@ namespace ChessConsoleApp
 			Game Game = new Game();
 			Game.History.Push(board);
 			Game.Players.Enqueue(new BasePlayer() { Name = "player1", Color = Color.White });
-			Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			//Game.Players.Enqueue(new BasePlayer() { Name = "player2", Color = Color.Black });
+			Game.Players.Enqueue(new HumanPlayer() { Name = "player2", Color = Color.Black });
+			
 
 			return Game;
         }

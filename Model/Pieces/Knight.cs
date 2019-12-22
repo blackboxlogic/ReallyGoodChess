@@ -28,8 +28,8 @@ namespace Model.Pieces
 			{
 				var landed = Location + direction;
 
-				if (IsOnBoard(landed)
-					&& board[landed.X, landed.Y]?.Color != Color) {
+				if (IsOnBoard(landed) && board[landed.X, landed.Y]?.Color != Color)
+				{
 					boards.Add(CloneBoardAndMove<Knight>(board, landed));
 				}
 			}
