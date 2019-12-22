@@ -7,6 +7,7 @@ namespace Model.Players
 		public int ChooseHumanMove(BasePiece[,] currentBoard, BasePiece[][,] choices, HumanPlayer player)
 		{
 			int moveCount = 1;
+			int moveIndex = 0;
 
 			Console.WriteLine("Please enter the number of the move that you want to take:\n");
 
@@ -28,7 +29,13 @@ namespace Model.Players
 				}
 			}
 
-			int moveIndex = Convert.ToInt32(Console.ReadLine());
+			moveIndex = Convert.ToInt32(Console.ReadLine());
+			while (moveIndex  > moveCount)
+			{
+				Console.WriteLine("Not a vlid move number. Please try again");
+				moveIndex = Convert.ToInt32(Console.ReadLine());
+			}
+
 			return moveIndex - 1;
 		}
 	}
