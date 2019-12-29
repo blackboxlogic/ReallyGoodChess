@@ -55,6 +55,8 @@ AND
 Implement [castling](https://en.wikipedia.org/wiki/Castling): If the king hasn't moved, and the rook hasn't moved, and there are no pieces in between them, the king moves two toward the rook and the rook jumps to the other side of the king.
 AND
 Implement the pawn's move [En Passant](https://en.wikipedia.org/wiki/En_passant): If an opponent's pawn has just (very last move) jumped two forward, one of your pawns can capture it as if it only moved one forward.
+AND
+When a player has pieces but no legal moves, the game crashes instead of ending in a draw.
 
 **OR**
 
