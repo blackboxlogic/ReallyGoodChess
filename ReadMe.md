@@ -17,6 +17,7 @@ Don't like all this chess stuff? Shoot me an email with a different project idea
 * Make a new type of chess piece (Inherits `BasePiece`)
   * Your piece should be not be over-powered or useless or like any other piece
   * Your piece should use a [different symbol](https://unicode-table.com/en) when displayed on the board
+    * Finding a working character that will render is part of the challenge. I went to an online unicode table and set the table's `font-family: "MS Gothic"`. It doesn't need to be the same shape for white and black.
   * Add this new piece in that gap next to the kings on the starting board
 
 Some inspiration:
@@ -54,6 +55,8 @@ AND
 Implement [castling](https://en.wikipedia.org/wiki/Castling): If the king hasn't moved, and the rook hasn't moved, and there are no pieces in between them, the king moves two toward the rook and the rook jumps to the other side of the king.
 AND
 Implement the pawn's move [En Passant](https://en.wikipedia.org/wiki/En_passant): If an opponent's pawn has just (very last move) jumped two forward, one of your pawns can capture it as if it only moved one forward.
+AND
+When a player has pieces but no legal moves, the game crashes instead of ending in a draw.
 
 **OR**
 
